@@ -1,6 +1,5 @@
 # 사이드 프로젝트를 하는 가장 쉬운 방법, 플젝폴짝 🐇
 ### 소규모 프로젝트 매칭 및 관리 프로그램
-> <b>※ 2023.01.15 : 수료 후에도 프로젝트 완성을 위해 현재 진행 중입니다. </b>
 
 ## [블로그 포스트 바로가기](https://jp0301.github.io/project/3-project)
 
@@ -66,10 +65,13 @@
 > 마이페이지 구현 <br>
 
 #### 박원석 
-> 플젝폴짝 로고 디자인, 배너 디자인 <br>
-> 공통 CSS / 레이아웃 관리 <br>
-> 내 프로젝트 홈(프로젝트 관리) 뷰 설계 및 기능 구현 <br>
-
+- 플젝폴짝 로고 디자인, 배너 디자인
+- 공통 CSS / 레이아웃 관리
+- 내 프로젝트 홈(프로젝트 관리) 뷰 설계 및 기능 구현
+  - 팀원 관리(팀 구성원 표시, 팀장 권한 위임, 팀원의 프로젝트 중단요청기능, 팀장의 프로젝트 중단 기능)
+  - 업무 관리(주요 업무 등록, 세부 업무 등록)
+  - 회의록 관리(회의록 등록, 수정, 삭제)
+  - FullCalender API 일정 관리 구현(일정 데이터 표시, 등록 구현 완료, 삭제 추가 예정)
 
 <br>
 
@@ -103,25 +105,124 @@
 
 <br>
 
-## 웹 실행 & 사용 방법
+## 담당 파트 구현
 
-### 메인 페이지
+### 프로젝트 조회,지원 / 소식란
 
+프로젝트 조회 페이지에서 일반 회원이 해당 프로젝트에 지원하면 <br />
+`소식`란에 해당 회원이 어떤 직무에 지원을 했다는 알림 데이터가 INSERT 되며 표시된다.
 
-### 로그인/회원가입
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/소식출력.png"
+  width="100%"
+/>
 
-### 프로젝트 목록
+### 프로젝트 조회, 지원 / 블랙리스트
 
-### 모집 & 지원하기
+프로젝트 개설자를 제외한 지원자들이 왼쪽 `지원자 목록`에 표시된다.<br />
+`드래그 앤 드랍`을 통해 `지원자 목록`의 지원자를 드래그해서 `차단 목록`에 드랍시키면<br />
+차단 목록에 INSERT 되며 해당 프로젝트에 지원 취소가 되며 지원할 수 없게 된다.
+다시 `지원자 목록`으로 드랍하면 블랙 리스트가 해제
 
-### 프로젝트 개설
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/블랙리스트.png"
+  width="100%"
+/>
 
-### 내 프로젝트 홈
+### 내 프로젝트 홈 / 프로젝트 목록
 
-### 기업 둘러보기
+회원이 자신의 프로젝트 목록을 볼 수 있다.<br />
+진행중인 프로젝트는 `1개`만 진행할 수 있다.<br />
+완료 프로젝트 목록에는 `완료 프로젝트`, `중단된 프로젝트`가 존재할 시 표시된다.
 
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/내프로젝트홈목록.png"
+  width="100%"
+/>
 
-<br>
+### 내 프로젝트 홈 / 팀원 관리
 
-## POLLJJAK WIKI (플젝폴짝 위키)
-[위키 바로가기(프로젝트 문서 작성은 완료되었으나 위키 작성은 준비중✈](https://github.com/POLLJJAK/POLLJJAK/wiki)
+프로젝트가 진행중인 상태인 경우
+
+1. 팀장 : 중단요청, 팀원평가, 마감처리, 권한위임, 팀원초대 버튼 활성화
+2. 팀원 : 중단요청, 팀원평가 버튼 활성화
+
+프로젝트가 완료되었거나 중단된 프로젝트인 경우
+
+- 중단요청, 팀원평가, 마감처리, 권한위임, 팀원초대 버튼은 활성화 되지 않는다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/팀원관리.png"
+  width="100%"
+/>
+
+팀장은 소속된 다른 팀원에게 팀원을 선택하고 양도 사유를 입력하여 팀장 권한을 양도할 수 있다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/팀장권한양도.png"
+  width="100%"
+/>
+
+팀원은 프로젝트 중단요청 버튼을 눌러 중단 의사를 밝힐 수 있다.<br />
+중단요청 시 해당 팀원 목록에서 `중단요청`이 빨갛게 `활성화`된다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/중단요청.png"
+  width="100%"
+/>
+
+### 내 프로젝트 홈 / 업무 관리
+
+주요업무 목록을 보여준다.<br />
+주요업무는 팀장만 등록할 수 있다.<br />
+세부 업무 개수와 세부 업무 완료 상태에 따라 주요 업무의 전체 진척도가 결정된다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/주요업무관리.png"
+  width="100%"
+/>
+
+주요 업무 내의 세부업무를 보여준다.<br />
+팀장이 주요 업무를 등록하면서 설정한 팀원들만 세부 업무를 등록, 삭제할 수 있다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/세부업무관리.png"
+  width="100%"
+/>
+
+### 내 프로젝트 홈 / 회의록 게시판
+
+회의록 게시판을 통해 회의 기록을 남길 수 있다.
+회의록은 팀원들 모두 등록할 수 있다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/회의록목록.png"
+  width="100%"
+/>
+
+회의록 내용을 보여준다.<br />
+회의록을 수정, 삭제 할 수 있다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/회의록상세보기.png"
+  width="100%"
+/>
+
+회의록 수정하기<br />
+회의록 작성과 수정은 `자바스크립트 라이브러리 웹 에디터 summernote`를 사용하였다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/회의록수정하기.png"
+  width="100%"
+/>
+
+### 내 프로젝트 홈 / 일정 관리
+
+일정을 알려주고 새로운 일정을 등록할 수 있다.<br />
+일정 버튼을 누르면 오른쪽 하단 Toast 창이 뜨면서 등록 할 수 있다.
+
+<img
+  src="https://raw.githubusercontent.com/jp0301/blog_upload_image/main/플젝폴짝캡처이미지/일정표시등록.png"
+  width="100%"
+/>
+
